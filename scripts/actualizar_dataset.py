@@ -1,5 +1,5 @@
 """
-Descarga la versión más reciente del dataset de Kaggle y reemplaza data/matches.csv.
+Descarga la versión más reciente del dataset de Kaggle y reemplaza data/matches_atp.csv.
 
 Uso:
     python scripts/actualizar_dataset.py
@@ -17,7 +17,7 @@ from pathlib import Path
 DATASET_SLUG = "dissfya/atp-tennis-2000-2023daily-pull"
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-DEST_FILE = DATA_DIR / "matches.csv"
+DEST_FILE = DATA_DIR / "matches_atp.csv"
 TMP_DIR = DATA_DIR / "_tmp_kaggle"
 
 

@@ -2,9 +2,9 @@
 Integración de datos Challenger (Jeff Sackmann) con el dataset existente.
 
 Genera 3 archivos en data/:
-  1. matches.csv          — dataset original (intacto, no se toca)
+  1. matches_atp.csv          — dataset original (intacto, no se toca)
   2. matches_challenger.csv — datos Sackmann concatenados (formato original, intacto)
-  3. matches_combined.csv   — unión de matches.csv + challenger convertido al mismo formato
+  3. matches_challenger_atp.csv   — unión de matches_atp.csv + challenger convertido al mismo formato
 
 Ejecutar desde la raíz del proyecto.
 """
@@ -119,7 +119,7 @@ COLS = ["Tournament","Date","Series","Court","Surface","Round","Best of",
 df_chall_fmt = df_chall[COLS].copy()
 
 # ── Leer dataset original ─────────────────────────────────────────────────────
-df_orig = pd.read_csv(os.path.join(DATA_DIR, "matches.csv"), low_memory=False)
+df_orig = pd.read_csv(os.path.join(DATA_DIR, "matches_atp.csv"), low_memory=False)
 
 # ── Combinar y ordenar ────────────────────────────────────────────────────────
 df_combined = pd.concat([df_orig, df_chall_fmt], ignore_index=True)
@@ -127,16 +127,16 @@ df_combined["Date"] = pd.to_datetime(df_combined["Date"], errors="coerce")
 df_combined = df_combined.sort_values("Date").reset_index(drop=True)
 df_combined["Date"] = df_combined["Date"].dt.strftime("%Y-%m-%d")
 
-out_path = os.path.join(DATA_DIR, "matches_combined.csv")
+out_path = os.path.join(DATA_DIR, "matches_challenger_atp.csv")
 df_combined.to_csv(out_path, index=False)
 
-print(f"  Filas en matches.csv original:       {len(df_orig):>7}")
-print(f"  Filas en matches_challenger.csv:     {len(challenger_raw):>7}")
-print(f"  Filas en matches_combined.csv:       {len(df_combined):>7}")
-print(f"\n  -> matches_combined.csv guardado")
+print(f"  Filas en matches_atp.csv original:       {len(df_orig):>7}")
+print(f"  Filas en matches_challenger.csv:         {len(challenger_raw):>7}")
+print(f"  Filas en matches_challenger_atp.csv:     {len(df_combined):>7}")
+print(f"\n  -> matches_challenger_atp.csv guardado")
 
 # ── Verificación: Sinner y Fonseca en combined ────────────────────────────────
-print("\nVerificación — partidos en matches_combined.csv:")
+print("\nVerificación — partidos en matches_challenger_atp.csv:")
 for player in ["Sinner J.", "Fonseca J."]:
     mask = (df_combined["Player_1"] == player) | (df_combined["Player_2"] == player)
     sub  = df_combined[mask]
@@ -145,6 +145,6 @@ for player in ["Sinner J.", "Fonseca J."]:
     print(f"  {player}: {len(sub)} partidos totales | {len(sub2y)} en primeros 2 años")
 
 print("\nListo. Los 3 archivos en data/:")
-print("  data/matches.csv             (original intacto)")
-print("  data/matches_challenger.csv  (Sackmann, formato original)")
-print("  data/matches_combined.csv    (combinado, formato del proyecto)")
+print("  data/matches_atp.csv             (original intacto)")
+print("  data/matches_challenger.csv      (Sackmann, formato original)")
+print("  data/matches_challenger_atp.csv  (combinado, formato del proyecto)")

@@ -1,6 +1,6 @@
 """
 Evolución del ranking ATP — Sinner vs Fonseca (primeros 2 años)
-Fuente: data/matches_combined.csv  |  Ejecutar desde la raíz del proyecto.
+Fuente: data/matches_challenger_atp.csv  |  Ejecutar desde la raíz del proyecto.
 """
 
 import pandas as pd
@@ -16,7 +16,7 @@ C_VERDE_MED = "#03664F"
 C_CREMA     = "#FFFDEE"
 
 # ── Datos ────────────────────────────────────────────────────────────────────
-df = pd.read_csv("data/matches_combined.csv", low_memory=False)
+df = pd.read_csv("data/matches_challenger_atp.csv", low_memory=False)
 df["Date"] = pd.to_datetime(df["Date"])
 
 def get_ranking_series(player_name, months=24):
@@ -236,7 +236,7 @@ ax.set_title(
 
 fig.text(
     0.01, 0.01,
-    "Fuente: data/matches_combined.csv  (ATP + Challenger)  |  ★ = título ganado  "
+    "Fuente: data/matches_challenger_atp.csv  (ATP + Challenger)  |  ★ = título ganado  "
     "|  Debut contado desde el primer partido Challenger  |  Ranking al momento del primer partido de cada torneo",
     fontsize=7.5, color=C_VERDE_MED, style="italic",
 )

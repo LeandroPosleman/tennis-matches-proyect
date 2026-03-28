@@ -1,6 +1,6 @@
 """
 Primeros 2 años en el circuito ATP: Sinner J. vs Fonseca J.
-Datos: data/matches.csv  |  Ejecutar desde la raíz del proyecto.
+Datos: data/matches_atp.csv  |  Ejecutar desde la raíz del proyecto.
 
 Nota: el dataset contiene solo partidos ATP (no Challengers).
 Fonseca disputó muchos Challengers en su primer año que no figuran aquí.
@@ -19,7 +19,7 @@ C_VERDE_MED = "#03664F"   # Fonseca / grilla
 C_CREMA     = "#FFFDEE"   # fondo
 
 # ── Carga del dataset ───────────────────────────────────────────────────────
-df = pd.read_csv("data/matches.csv", low_memory=False)
+df = pd.read_csv("data/matches_atp.csv", low_memory=False)
 df["Date"] = pd.to_datetime(df["Date"])
 
 # ── Función: extraer partidos de un jugador en sus primeros N meses ─────────

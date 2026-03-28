@@ -13,13 +13,13 @@ tennis-matches-proyect/
 ├── CLAUDE.md
 ├── README.md
 ├── data/
-│   └── matches.csv     # Dataset principal (~67.000 partidos, 8.5MB)
+│   └── matches_atp.csv     # Dataset principal (~67.000 partidos, 8.5MB)
 ├── graficos/           # Imágenes generadas (.png)
 ├── notebooks/          # Exploración interactiva (.ipynb)
 └── scripts/            # Scripts Python para gráficos y procesamiento
 ```
 
-## Dataset: data/matches.csv
+## Dataset: data/matches_atp.csv
 
 ### Columnas
 

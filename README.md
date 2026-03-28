@@ -7,7 +7,7 @@ Dataset y análisis de partidos de tenis masculino profesional (ATP) desde el a�
 ```
 tennis-matches-proyect/
 ├── data/
-│   └── matches.csv       # Dataset principal (~67.000 partidos)
+│   └── matches_atp.csv       # Dataset principal (~67.000 partidos)
 ├── graficos/             # Imágenes generadas
 ├── notebooks/            # Exploración interactiva
 └── scripts/              # Scripts para generar gráficos y análisis
@@ -15,7 +15,7 @@ tennis-matches-proyect/
 
 ## Dataset
 
-El archivo `data/matches.csv` contiene ~67.289 partidos de singles masculino ATP entre 2000-01-03 y 2026-03-15.
+El archivo `data/matches_atp.csv` contiene ~67.289 partidos de singles masculino ATP entre 2000-01-03 y 2026-03-15.
 
 | Columna    | Descripción                                              |
 |------------|----------------------------------------------------------|

@@ -1,6 +1,6 @@
 # Archivos de data grandes / derivados
 data/matches_challenger.csv
-data/matches_combined.csv
+
 data/sackmann_chall_*.csv
 data/_tmp_kaggle/
 
