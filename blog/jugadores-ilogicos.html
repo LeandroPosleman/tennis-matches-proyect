@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Quién es el jugador más ilógico del tenis? · Tenis en Datos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--verde-osc);
+      font-family: 'Georgia', serif;
+    }
+
+    /* HEADER */
+    header {
+      background-color: var(--verde-osc);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--amarillo);
+      letter-spacing: -1px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: var(--crema);
+      opacity: 0.75;
+      font-style: italic;
+    }
+
+    nav {
+      background-color: var(--verde-med);
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 12px;
+    }
+
+    nav a {
+      color: var(--crema);
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    nav a:hover { color: var(--amarillo); }
+
+    /* ARTICLE */
+    article {
+      max-width: 720px;
+      margin: 56px auto;
+      padding: 0 24px;
+    }
+
+    .breadcrumb {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      margin-bottom: 28px;
+    }
+
+    .breadcrumb a {
+      color: var(--verde-med);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover { color: var(--verde-osc); }
+
+    .tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-med);
+      margin-bottom: 14px;
+    }
+
+    h1.post-title {
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: var(--verde-osc);
+    }
+
+    .meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: #6a9a88;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #c8e0d0;
+    }
+
+    /* TEXTO */
+    .post-body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      color: #1a3a30;
+    }
+
+    .post-body h2 {
+      font-size: 1.35rem;
+      margin: 40px 0 16px;
+      color: var(--verde-osc);
+      border-left: 4px solid var(--amarillo);
+      padding-left: 14px;
+    }
+
+    /* IMAGEN */
+    .post-img {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .post-img img {
+      width: 100%;
+      max-width: 680px;
+      border-radius: 4px;
+      border: 1px solid #c8e0d0;
+    }
+
+    .post-img figcaption {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: #6a9a88;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* CAJA DE METODOLOGÍA */
+    .metodo-box {
+      background-color: #eef7f0;
+      border-left: 4px solid var(--verde-med);
+      padding: 20px 24px;
+      margin: 36px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .metodo-box h3 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-med);
+      margin-bottom: 12px;
+    }
+
+    .metodo-box p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #1a3a30;
+      margin-bottom: 8px;
+    }
+
+    .metodo-box p:last-child { margin-bottom: 0; }
+
+    /* TABLA TOP 10 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.88rem;
+    }
+
+    thead tr {
+      background-color: var(--verde-osc);
+      color: var(--amarillo);
+    }
+
+    thead th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: normal;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr:nth-child(odd)  { background-color: #f0f9f4; }
+    tbody tr:nth-child(even) { background-color: var(--crema); }
+
+    tbody tr:first-child td { font-weight: bold; color: var(--verde-osc); }
+
+    tbody td {
+      padding: 10px 14px;
+      color: #1a3a30;
+      border-bottom: 1px solid #c8e0d0;
+    }
+
+    tbody tr:first-child td:first-child::after {
+      content: " 🏆";
+    }
+
+    /* BACK */
+    .back-link {
+      display: inline-block;
+      margin-top: 48px;
+      margin-bottom: 64px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--verde-med);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .back-link:hover { color: var(--verde-osc); }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--verde-osc);
+      text-align: center;
+      padding: 32px 24px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: var(--crema);
+    }
+
+    footer span { color: var(--amarillo); }
+
+    @media (max-width: 600px) {
+      header { padding: 32px 16px 24px; }
+      header h1 { font-size: 1.8rem; }
+      nav { gap: 16px; flex-wrap: wrap; padding: 10px 16px; }
+      article { margin: 32px auto; }
+      h1.post-title { font-size: 1.55rem; }
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .metodo-box { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tenis en Datos</h1>
+    <p>Análisis del circuito ATP con datos reales</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="analisis.html">Análisis</a>
+    <a href="sobre.html">Sobre el proyecto</a>
+  </nav>
+
+  <article>
+
+    <p class="breadcrumb"><a href="index.html">Inicio</a> &rsaquo; Análisis &rsaquo; Jugadores más ilógicos</p>
+
+    <p class="tag">Análisis · Rankings · ATP 2010–2026</p>
+    <h1 class="post-title">¿Quién es el jugador más ilógico del tenis?</h1>
+    <p class="meta">Marzo 2026 · 5 min de lectura</p>
+
+    <div class="post-body">
+
+      <p>
+        El tenis tiene una lógica simple: gana el mejor rankeado. Pero hay jugadores
+        que parecen no entender eso. Medimos cuántas veces cada jugador le ganó a
+        alguien mejor rankeado — y no nos importaron los golpes de suerte. Buscamos
+        a los que lo hacen de forma <em>consistente</em>.
+      </p>
+
+      <p>
+        Este es el ranking de los más ilógicos del circuito ATP entre 2010 y 2026.
+        Los que las casas de apuestas les tienen miedo.
+      </p>
+
+      <figure class="post-img">
+        <img src="graficos/jugador_mas_ilogico.png" alt="Top 10 jugadores más ilógicos del ATP" />
+        <figcaption>Top 10 jugadores más ilógicos del circuito ATP (2010–2026)</figcaption>
+      </figure>
+
+      <h2>Cómo lo medimos</h2>
+
+      <p>
+        Para cada victoria, calculamos cuántos puestos de ranking separaban al ganador
+        del perdedor, y multiplicamos esa diferencia por el peso del torneo. Una victoria
+        en un Grand Slam vale cuatro veces más que en un ATP250 — porque sorprender ahí
+        es mucho más difícil.
+      </p>
+
+      <div class="metodo-box">
+        <h3>Metodología</h3>
+        <p><strong>Score por partido</strong> = (ranking ganador − ranking perdedor) × peso del torneo</p>
+        <p>Solo se cuenta cuando el ganador tiene peor ranking (número mayor) que el perdedor.</p>
+        <p><strong>Pesos:</strong> Grand Slam ×4 · Masters 1000 ×3 · ATP500 ×2 · ATP250 ×1</p>
+        <p><strong>Métrica final:</strong> mediana de todos los scores por partido, para evitar que un solo partido inflado distorsione el resultado.</p>
+        <p><strong>Filtros:</strong> partidos ATP desde 2010 · jugadores que alguna vez estuvieron en el top 100 · mínimo 50 victorias.</p>
+      </div>
+
+      <p>
+        Usamos la <strong>mediana</strong> en lugar del promedio por una razón concreta: algunos jugadores
+        veteranos que volvían de lesiones largas aparecían rankeados en el #800 y ganaban
+        partidos con diferencias de ranking absurdas. Eso inflaba el promedio pero no
+        decía nada sobre su consistencia real. La mediana ignora esos outliers.
+      </p>
+
+      <h2>El resultado</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Jugador</th>
+            <th>Mediana por partido</th>
+            <th>% vs mejor rankeado</th>
+            <th>Mejor ranking</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Kokkinakis T.</td><td>87</td><td>80%</td><td>#65</td></tr>
+          <tr><td>2</td><td>Brooksby J.</td><td>48</td><td>66%</td><td>#33</td></tr>
+          <tr><td>3</td><td>Brown D.</td><td>40</td><td>84%</td><td>#66</td></tr>
+          <tr><td>4</td><td>Vukic A.</td><td>40</td><td>65%</td><td>#50</td></tr>
+          <tr><td>5</td><td>Ebden M.</td><td>35</td><td>66%</td><td>#39</td></tr>
+          <tr><td>6</td><td>Gojowczyk P.</td><td>32</td><td>67%</td><td>#39</td></tr>
+          <tr><td>7</td><td>Berankis R.</td><td>32</td><td>67%</td><td>#50</td></tr>
+          <tr><td>8</td><td>Moutet C.</td><td>29</td><td>64%</td><td>#31</td></tr>
+          <tr><td>9</td><td>Daniel T.</td><td>27</td><td>66%</td><td>#58</td></tr>
+          <tr><td>10</td><td>Hanfmann Y.</td><td>27</td><td>65%</td><td>#45</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Kokkinakis</strong> lidera con claridad. Su mediana de 87 significa que en la mitad
+        de sus partidos ganados le sacó más de 87 puestos de ranking a su rival — y lo
+        hizo en el 80% de sus victorias. Un caso casi único en el circuito.
+      </p>
+
+      <p>
+        Lo interesante del top 10 es que ninguno pasó del puesto #31 en el ranking. No
+        son jugadores que dominaron el circuito — son jugadores que aprendieron a ganarle
+        a quienes sí lo hacían.
+      </p>
+
+    </div>
+
+    <a class="back-link" href="index.html">← Volver al inicio</a>
+
+  </article>
+
+  <footer>
+    <p>Tenis en Datos · Análisis del circuito ATP · <span>2026</span></p>
+  </footer>
+
+</body>
+</html>

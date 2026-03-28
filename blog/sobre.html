@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre el proyecto · Tenis en Datos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+    body { background-color: var(--crema); color: var(--verde-osc); font-family: 'Georgia', serif; }
+    header { background-color: var(--verde-osc); padding: 48px 24px 40px; text-align: center; }
+    header h1 { font-size: 2.8rem; color: var(--amarillo); letter-spacing: -1px; }
+    header p { margin-top: 10px; font-size: 1rem; color: var(--crema); opacity: 0.75; font-style: italic; }
+    nav { background-color: var(--verde-med); display: flex; justify-content: center; gap: 32px; padding: 12px; }
+    nav a { color: var(--crema); text-decoration: none; font-family: 'Arial', sans-serif; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+    nav a:hover { color: var(--amarillo); }
+    nav a.active { color: var(--amarillo); }
+    main { max-width: 720px; margin: 56px auto 80px; padding: 0 24px; }
+    .section-label { font-family: 'Arial', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--verde-med); margin-bottom: 28px; border-bottom: 2px solid var(--amarillo); padding-bottom: 8px; display: inline-block; }
+    h2.page-title { font-size: 2rem; line-height: 1.2; margin-bottom: 32px; color: var(--verde-osc); }
+    .body p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 22px; color: #1a3a30; }
+    .body h3 { font-size: 1.15rem; margin: 36px 0 14px; color: var(--verde-osc); border-left: 4px solid var(--amarillo); padding-left: 14px; }
+    .dataset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+    .dataset-card { background-color: #eef7f0; border: 1px solid #c8e0d0; border-radius: 4px; padding: 18px 20px; }
+    .dataset-card .label { font-family: 'Arial', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--verde-med); margin-bottom: 6px; }
+    .dataset-card .valor { font-size: 1.4rem; font-weight: bold; color: var(--verde-osc); }
+    .dataset-card .desc { font-family: 'Arial', sans-serif; font-size: 0.78rem; color: #6a9a88; margin-top: 4px; }
+    footer { background-color: var(--verde-osc); text-align: center; padding: 32px 24px; font-family: 'Arial', sans-serif; font-size: 0.8rem; color: var(--crema); }
+    footer span { color: var(--amarillo); }
+
+    @media (max-width: 600px) {
+      header { padding: 32px 16px 24px; }
+      header h1 { font-size: 1.8rem; }
+      nav { gap: 16px; flex-wrap: wrap; padding: 10px 16px; }
+      main { margin: 32px auto 48px; }
+      .dataset-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tenis en Datos</h1>
+    <p>Análisis del circuito ATP con datos reales</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="analisis.html">Análisis</a>
+    <a href="sobre.html" class="active">Sobre el proyecto</a>
+  </nav>
+
+  <main>
+    <p class="section-label">Sobre el proyecto</p>
+    <h2 class="page-title">Tenis en Datos</h2>
+
+    <div class="body">
+
+      <p>
+        Este blog nació de una idea simple: el tenis genera una cantidad enorme de datos
+        y la mayoría de los análisis que circulan son superficiales. Victorias, derrotas,
+        rankings. Pero hay preguntas mucho más interesantes que se pueden responder si uno
+        se sienta con los datos reales.
+      </p>
+
+      <p>
+        ¿Quién es el jugador más ilógico del circuito? ¿Qué tan difícil es realmente
+        llegar al Top 100? ¿Cómo se comparan dos generaciones de jugadores en sus inicios?
+        Esas son las preguntas que nos interesan.
+      </p>
+
+      <h3>Los datos</h3>
+
+      <p>
+        Todos los análisis se construyen sobre datasets públicos del circuito ATP y
+        Challenger, que cubren partidos desde el año 2000 hasta la actualidad.
+      </p>
+
+      <div class="dataset-grid">
+        <div class="dataset-card">
+          <p class="label">Dataset ATP</p>
+          <p class="valor">~67.000</p>
+          <p class="desc">partidos ATP (2000–2026)</p>
+        </div>
+        <div class="dataset-card">
+          <p class="label">Dataset combinado</p>
+          <p class="valor">~108.000</p>
+          <p class="desc">partidos ATP + Challenger</p>
+        </div>
+      </div>
+
+      <p>
+        Cada análisis incluye la metodología utilizada — qué decisiones se tomaron,
+        por qué, y qué limitaciones tienen los datos. El objetivo no es solo mostrar
+        un resultado sino explicar cómo se llegó a él.
+      </p>
+
+      <h3>Herramientas</h3>
+
+      <p>
+        Los análisis se realizan en Python con pandas y matplotlib. Los gráficos
+        se generan con scripts propios sobre los datasets originales, sin herramientas
+        de visualización externas.
+      </p>
+
+      <h3>Fuente de datos</h3>
+
+      <p>
+        Los datos provienen del repositorio público de Jeff Sackmann
+        (<em>tennis_atp</em>), una de las fuentes más completas y mantenidas de
+        datos históricos de tenis masculino.
+      </p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Tenis en Datos · Análisis del circuito ATP · <span>2026</span></p>
+  </footer>
+
+</body>
+</html>

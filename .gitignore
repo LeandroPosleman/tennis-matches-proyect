@@ -1,0 +1,18 @@
+# Archivos de data grandes / derivados
+data/matches_challenger.csv
+data/matches_combined.csv
+data/sackmann_chall_*.csv
+data/_tmp_kaggle/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
