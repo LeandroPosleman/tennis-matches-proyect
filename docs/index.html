@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenis in Data</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--verde-osc);
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ───────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 253, 238, 0.90);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    .site-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+    }
+
+    .site-brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--verde-osc);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .site-brand:hover { color: var(--verde-med); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      color: var(--verde-med);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--verde-osc); }
+    .nav-links a.active { color: var(--verde-osc); font-weight: bold; }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      flex: 1;
+    }
+
+    /* ── HERO ─────────────────────────────────── */
+    .page-hero {
+      padding: 56px 0 40px;
+      border-bottom: 1px solid rgba(0, 52, 43, 0.08);
+    }
+
+    .page-hero h1 {
+      font-size: 2.6rem;
+      line-height: 1.1;
+      letter-spacing: -0.8px;
+      color: var(--verde-osc);
+      margin-bottom: 12px;
+    }
+
+    .page-hero .hero-sub {
+      font-size: 1rem;
+      color: var(--verde-med);
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    /* ── POST LIST ────────────────────────────── */
+    .post-list {
+      list-style: none;
+    }
+
+    .post-item {
+      border-bottom: 1px solid rgba(0, 52, 43, 0.08);
+    }
+
+    .post-item > a {
+      display: block;
+      text-decoration: none;
+      padding: 32px 0;
+      transition: transform 0.2s ease-out;
+      color: inherit;
+    }
+
+    .post-item > a:hover {
+      transform: translateY(-2px);
+    }
+
+    .post-tag {
+      display: block;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-med);
+      margin-bottom: 10px;
+      opacity: 0.85;
+    }
+
+    .post-item h2 {
+      font-size: 1.55rem;
+      line-height: 1.25;
+      color: var(--verde-osc);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+      font-weight: normal;
+    }
+
+    .post-item > a:hover h2 { color: var(--verde-med); }
+
+    .post-item:first-child h2 {
+      font-size: 2rem;
+    }
+
+    .post-meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--verde-med);
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      padding: 20px 24px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      border-top: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    footer span { color: var(--verde-osc); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 600px) {
+      .page-hero { padding: 36px 0 28px; }
+      .page-hero h1 { font-size: 1.8rem; }
+      .nav-links { gap: 16px; }
+      .post-item h2 { font-size: 1.3rem; }
+      .post-item:first-child h2 { font-size: 1.6rem; }
+      .post-item > a { padding: 24px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="site-nav">
+      <a href="index.html" class="site-brand">Tenis in Data</a>
+      <div class="nav-links">
+        <a href="analisis.html">Análisis</a>
+        <a href="sobre.html">Sobre</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="page-hero">
+      <h1>Tenis in Data</h1>
+      <p class="hero-sub">Cada número tiene una historia detrás.</p>
+    </div>
+
+    <ul class="post-list">
+
+      <li class="post-item">
+        <a href="bucharest-smash-it-parte1.html">
+          <span class="post-tag">Machine Learning · Fantasy · ATP 250</span>
+          <h2>Bucharest con datos: armé mi equipo de Smash It con machine learning</h2>
+          <p class="post-meta">Marzo 2026 · 2 partes</p>
+        </a>
+      </li>
+
+      <li class="post-item">
+        <a href="jugadores-ilogicos.html">
+          <span class="post-tag">Análisis · Rankings · ATP 2010–2026</span>
+          <h2>¿Quién es el jugador más ilógico del tenis?</h2>
+          <p class="post-meta">Marzo 2026</p>
+        </a>
+      </li>
+
+      <li class="post-item">
+        <a href="sinner-vs-fonseca.html">
+          <span class="post-tag">Comparativa · Jóvenes talentos</span>
+          <h2>Sinner vs Fonseca: ¿quién tuvo los mejores primeros 2 años?</h2>
+          <p class="post-meta">Febrero 2025</p>
+        </a>
+      </li>
+
+      <li class="post-item">
+        <a href="cuantos-llegan-al-top100.html">
+          <span class="post-tag">Estructura del circuito</span>
+          <h2>¿Cuántos tenistas llegan realmente al Top 100?</h2>
+          <p class="post-meta">2025</p>
+        </a>
+      </li>
+
+    </ul>
+
+  </main>
+
+  <footer>
+    <p>Tenis in Data · Análisis del circuito <span>ATP</span></p>
+  </footer>
+
+</body>
+</html>

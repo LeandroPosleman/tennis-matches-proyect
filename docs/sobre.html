@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre el proyecto · Tenis in Data</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--verde-osc);
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ───────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 253, 238, 0.90);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    .site-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+    }
+
+    .site-brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--verde-osc);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .site-brand:hover { color: var(--verde-med); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      color: var(--verde-med);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--verde-osc); }
+    .nav-links a.active { color: var(--verde-osc); font-weight: bold; }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      flex: 1;
+    }
+
+    h1.page-title {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 40px;
+      color: var(--verde-osc);
+      letter-spacing: -0.4px;
+    }
+
+    .body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      color: #1a3a30;
+    }
+
+    .body h3 {
+      font-size: 1.1rem;
+      margin: 40px 0 14px;
+      color: var(--verde-osc);
+      border-left: 3px solid var(--amarillo);
+      padding-left: 14px;
+    }
+
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .dataset-card {
+      background-color: rgba(0, 52, 43, 0.04);
+      border: 1px solid rgba(0, 52, 43, 0.10);
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .dataset-card .label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--verde-med);
+      margin-bottom: 6px;
+    }
+
+    .dataset-card .valor {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--verde-osc);
+    }
+
+    .dataset-card .desc {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: #6a9a88;
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      padding: 20px 24px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      border-top: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    footer span { color: var(--verde-osc); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 600px) {
+      main { padding: 36px 24px 56px; }
+      .nav-links { gap: 16px; }
+      .dataset-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="site-nav">
+      <a href="index.html" class="site-brand">Tenis in Data</a>
+      <div class="nav-links">
+        <a href="analisis.html">Análisis</a>
+        <a href="sobre.html" class="active">Sobre</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-title">Tenis in Data</h1>
+
+    <div class="body">
+
+      <p>
+        Este blog nació de una idea simple: el tenis genera una cantidad enorme de datos
+        y la mayoría de los análisis que circulan son superficiales. Victorias, derrotas,
+        rankings. Pero hay preguntas mucho más interesantes que se pueden responder si uno
+        se sienta con los datos reales.
+      </p>
+
+      <p>
+        ¿Quién es el jugador más ilógico del circuito? ¿Qué tan difícil es realmente
+        llegar al Top 100? ¿Cómo se comparan dos generaciones de jugadores en sus inicios?
+        Esas son las preguntas que nos interesan.
+      </p>
+
+      <h3>Los datos</h3>
+
+      <p>
+        Todos los análisis se construyen sobre datasets públicos del circuito ATP y
+        Challenger, que cubren partidos desde el año 2000 hasta la actualidad.
+      </p>
+
+      <div class="dataset-grid">
+        <div class="dataset-card">
+          <p class="label">Dataset ATP</p>
+          <p class="valor">~67.000</p>
+          <p class="desc">partidos ATP (2000–2026)</p>
+        </div>
+        <div class="dataset-card">
+          <p class="label">Dataset combinado</p>
+          <p class="valor">~108.000</p>
+          <p class="desc">partidos ATP + Challenger</p>
+        </div>
+      </div>
+
+      <p>
+        Cada análisis incluye la metodología utilizada — qué decisiones se tomaron,
+        por qué, y qué limitaciones tienen los datos. El objetivo no es solo mostrar
+        un resultado sino explicar cómo se llegó a él.
+      </p>
+
+      <h3>Herramientas</h3>
+
+      <p>
+        Los análisis se realizan en Python con pandas y matplotlib. Los gráficos
+        se generan con scripts propios sobre los datasets originales, sin herramientas
+        de visualización externas.
+      </p>
+
+      <h3>Fuente de datos</h3>
+
+      <p>
+        Los datos provienen del repositorio público de Jeff Sackmann
+        (<em>tennis_atp</em>), una de las fuentes más completas y mantenidas de
+        datos históricos de tenis masculino.
+      </p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Tenis in Data · Análisis del circuito <span>ATP</span></p>
+  </footer>
+
+</body>
+</html>

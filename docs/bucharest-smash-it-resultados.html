@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bucharest Smash It: los resultados reales · Tenis in Data</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--verde-osc);
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ───────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 253, 238, 0.90);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    .site-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+    }
+
+    .site-brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--verde-osc);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .site-brand:hover { color: var(--verde-med); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      color: var(--verde-med);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--verde-osc); }
+
+    /* ── ARTICLE ──────────────────────────────── */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      flex: 1;
+    }
+
+    .breadcrumb {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--verde-med);
+      margin-bottom: 32px;
+      opacity: 0.7;
+    }
+
+    .breadcrumb a { color: inherit; text-decoration: none; }
+    .breadcrumb a:hover { opacity: 1; }
+
+    .parte-badge {
+      display: inline-block;
+      background-color: var(--amarillo);
+      color: var(--verde-osc);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-med);
+      margin-bottom: 14px;
+    }
+
+    h1.post-title {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--verde-osc);
+      letter-spacing: -0.5px;
+    }
+
+    .meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      opacity: 0.65;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    /* ── POST BODY ────────────────────────────── */
+    .post-body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      color: #1a3a30;
+    }
+
+    .post-body a { color: var(--verde-med); }
+    .post-body a:hover { color: var(--verde-osc); }
+
+    .post-body h2 {
+      font-size: 1.3rem;
+      margin: 44px 0 16px;
+      color: var(--verde-osc);
+      border-left: 3px solid var(--amarillo);
+      padding-left: 14px;
+    }
+
+    /* ── DATO DESTACADO ───────────────────────── */
+    .dato-destacado {
+      background-color: var(--verde-osc);
+      color: var(--amarillo);
+      text-align: center;
+      padding: 28px 24px;
+      margin: 36px 0;
+      border-radius: 6px;
+    }
+
+    .dato-destacado .numero { font-size: 3rem; font-weight: bold; line-height: 1; }
+    .dato-destacado .label { font-family: 'Arial', sans-serif; font-size: 0.85rem; margin-top: 8px; color: var(--crema); opacity: 0.8; }
+
+    /* ── DATOS GRID ───────────────────────────── */
+    .datos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 36px 0;
+    }
+
+    .dato-card {
+      border: 1px solid rgba(0, 52, 43, 0.12);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .dato-card .jugador { font-family: 'Arial', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--verde-med); margin-bottom: 8px; }
+    .dato-card .valor { font-size: 1.6rem; font-weight: bold; color: var(--verde-osc); }
+    .dato-card .desc { font-family: 'Arial', sans-serif; font-size: 0.78rem; color: #6a9a88; margin-top: 4px; }
+
+    /* ── TABLA ────────────────────────────────── */
+    .equipo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .equipo-table th {
+      background-color: var(--verde-osc);
+      color: var(--amarillo);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: normal;
+      letter-spacing: 0.5px;
+    }
+
+    .equipo-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(0, 52, 43, 0.08);
+      color: #1a3a30;
+    }
+
+    .equipo-table tr:last-child td {
+      border-bottom: none;
+      font-weight: bold;
+      background-color: rgba(0, 52, 43, 0.04);
+    }
+
+    .equipo-table .pts { text-align: right; }
+    .equipo-table .acierto { text-align: center; font-size: 1.1rem; }
+
+    /* ── CALLOUT ──────────────────────────────── */
+    .callout {
+      background-color: rgba(0, 52, 43, 0.04);
+      border-left: 3px solid var(--amarillo);
+      padding: 18px 20px;
+      margin: 32px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p { margin-bottom: 0; font-size: 0.97rem; color: #1a3a30; line-height: 1.7; }
+
+    /* ── PARTE NAV ────────────────────────────── */
+    .parte-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 52, 43, 0.10);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+    }
+
+    .parte-nav a { color: var(--verde-med); text-decoration: none; }
+    .parte-nav a:hover { color: var(--verde-osc); }
+
+    /* ── BACK ─────────────────────────────────── */
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--verde-med);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--verde-osc); }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      padding: 20px 24px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      border-top: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    footer span { color: var(--verde-osc); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 600px) {
+      article { padding: 32px 24px 56px; }
+      h1.post-title { font-size: 1.7rem; }
+      .nav-links { gap: 16px; }
+      .dato-destacado .numero { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="site-nav">
+      <a href="index.html" class="site-brand">Tenis in Data</a>
+      <div class="nav-links">
+        <a href="analisis.html">Análisis</a>
+        <a href="sobre.html">Sobre</a>
+      </div>
+    </nav>
+  </header>
+
+  <article>
+
+    <p class="breadcrumb"><a href="index.html">Inicio</a> &rsaquo; Análisis &rsaquo; Bucharest Smash It</p>
+
+    <span class="parte-badge">Parte 2 de 2</span>
+    <p class="tag">Machine Learning · Fantasy · ATP 250</p>
+    <h1 class="post-title">Bucharest Smash It: lo que predijo el modelo y lo que pasó</h1>
+    <p class="meta">Abril 2026 · 4 min de lectura</p>
+
+    <div class="post-body">
+
+      <p>
+        En la <a href="bucharest-smash-it-parte1.html">parte 1</a> construimos un modelo
+        que simuló el ATP 250 de Bucharest 10.000 veces y eligió el equipo óptimo de Smash It.
+        Ahora llegó la hora de la verdad: ¿qué pasó realmente?
+      </p>
+
+      <h2>El equipo elegido por el modelo</h2>
+
+      <table class="equipo-table">
+        <thead>
+          <tr>
+            <th>Jugador</th>
+            <th class="pts">Pts esperados</th>
+            <th class="pts">Pts reales</th>
+            <th class="acierto">Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>M. Arnaldi</td>
+            <td class="pts">50.8</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>D. Dzumhur</td>
+            <td class="pts">47.6</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>P. Carreno-Busta</td>
+            <td class="pts">46.4</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>S. Baez</td>
+            <td class="pts">46.2</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>M. Navone</td>
+            <td class="pts">44.7</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>F. Marozsan</td>
+            <td class="pts">44.3</td>
+            <td class="pts">—</td>
+            <td class="acierto">—</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td class="pts">280.1</td>
+            <td class="pts">—</td>
+            <td class="acierto"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Qué salió bien</h2>
+
+      <p>[Completar con resultados reales del torneo]</p>
+
+      <h2>Qué falló</h2>
+
+      <p>[Completar con resultados reales del torneo]</p>
+
+      <h2>El veredicto</h2>
+
+      <p>[Completar con conclusiones tras el torneo]</p>
+
+    </div>
+
+    <div class="parte-nav">
+      <a href="bucharest-smash-it-parte1.html">&lsaquo; Parte 1: La metodología</a>
+      <span></span>
+    </div>
+
+    <a class="back-link" href="index.html">&larr; Volver al inicio</a>
+
+  </article>
+
+  <footer>
+    <p>Tenis in Data · construido con <span>datos reales del circuito ATP</span></p>
+  </footer>
+
+</body>
+</html>

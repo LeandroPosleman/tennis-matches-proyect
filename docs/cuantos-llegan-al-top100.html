@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cuántos llegan al Top 100? · Tenis in Data</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amarillo:  #D9EF00;
+      --verde-osc: #00342B;
+      --verde-med: #03664F;
+      --crema:     #FFFDEE;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--verde-osc);
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ───────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 253, 238, 0.90);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    .site-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+    }
+
+    .site-brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--verde-osc);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .site-brand:hover { color: var(--verde-med); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      color: var(--verde-med);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--verde-osc); }
+
+    /* ── ARTICLE ──────────────────────────────── */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      flex: 1;
+    }
+
+    .breadcrumb {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--verde-med);
+      margin-bottom: 32px;
+      opacity: 0.7;
+    }
+
+    .breadcrumb a { color: inherit; text-decoration: none; }
+    .breadcrumb a:hover { opacity: 1; }
+
+    .tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-med);
+      margin-bottom: 14px;
+    }
+
+    h1.post-title {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--verde-osc);
+      letter-spacing: -0.5px;
+    }
+
+    .meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      opacity: 0.65;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    /* ── POST BODY ────────────────────────────── */
+    .post-body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      color: #1a3a30;
+    }
+
+    .post-body h2 {
+      font-size: 1.3rem;
+      margin: 44px 0 16px;
+      color: var(--verde-osc);
+      border-left: 3px solid var(--amarillo);
+      padding-left: 14px;
+    }
+
+    /* ── IMAGEN ───────────────────────────────── */
+    .post-img {
+      margin: 44px 0;
+      text-align: center;
+    }
+
+    .post-img img {
+      width: 100%;
+      max-width: 580px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 52, 43, 0.12);
+    }
+
+    .post-img figcaption {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: #6a9a88;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ── DATO DESTACADO ───────────────────────── */
+    .dato-destacado {
+      background-color: var(--verde-osc);
+      color: var(--amarillo);
+      text-align: center;
+      padding: 32px 24px;
+      margin: 36px 0;
+      border-radius: 6px;
+    }
+
+    .dato-destacado .numero { font-size: 4rem; font-weight: bold; line-height: 1; }
+    .dato-destacado .label { font-family: 'Arial', sans-serif; font-size: 0.9rem; margin-top: 10px; color: var(--crema); opacity: 0.85; }
+
+    /* ── STATS ROW ────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 36px 0;
+    }
+
+    .stat-box {
+      border: 1px solid rgba(0, 52, 43, 0.12);
+      border-radius: 6px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-box .valor { font-size: 1.8rem; font-weight: bold; color: var(--verde-osc); }
+    .stat-box .pct { font-size: 1rem; color: var(--verde-med); font-family: 'Arial', sans-serif; margin-top: 2px; }
+    .stat-box .desc { font-family: 'Arial', sans-serif; font-size: 0.75rem; color: #6a9a88; margin-top: 6px; }
+
+    /* ── BACK ─────────────────────────────────── */
+    .back-link {
+      display: inline-block;
+      margin-top: 48px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--verde-med);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--verde-osc); }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      padding: 20px 24px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--verde-med);
+      border-top: 1px solid rgba(0, 52, 43, 0.10);
+    }
+
+    footer span { color: var(--verde-osc); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 600px) {
+      article { padding: 32px 24px 56px; }
+      h1.post-title { font-size: 1.7rem; }
+      .nav-links { gap: 16px; }
+      .dato-destacado .numero { font-size: 2.6rem; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="site-nav">
+      <a href="index.html" class="site-brand">Tenis in Data</a>
+      <div class="nav-links">
+        <a href="analisis.html">Análisis</a>
+        <a href="sobre.html">Sobre</a>
+      </div>
+    </nav>
+  </header>
+
+  <article>
+
+    <p class="breadcrumb"><a href="index.html">Inicio</a> &rsaquo; Análisis &rsaquo; ¿Cuántos llegan al Top 100?</p>
+
+    <p class="tag">Análisis · Estructura del circuito</p>
+    <h1 class="post-title">¿Cuántos tenistas llegan realmente al Top 100?</h1>
+    <p class="meta">2025 · 3 min de lectura</p>
+
+    <div class="post-body">
+
+      <p>
+        Ser tenista profesional no significa estar en el Top 100. Ni cerca. Cada año
+        miles de jugadores compiten en el circuito Challenger — la antesala del ATP —
+        y la enorme mayoría nunca llega a estar entre los 100 mejores del mundo.
+      </p>
+
+      <p>
+        Analizamos todos los jugadores que disputaron al menos un partido Challenger
+        entre 2000 y 2024 para entender qué tan exclusivo es realmente ese umbral.
+      </p>
+
+      <div class="dato-destacado">
+        <p class="numero">1 de cada 9</p>
+        <p class="label">jugadores que juegan un Challenger llegan al Top 100</p>
+      </div>
+
+      <figure class="post-img">
+        <img src="graficos/funnel_challenger_top100_v2.png" alt="Funnel: ¿cuántos llegan al Top 100?" />
+        <figcaption>De 6.345 jugadores con al menos un partido Challenger, solo 687 alcanzaron el Top 100</figcaption>
+      </figure>
+
+      <h2>El filtro del circuito ATP</h2>
+
+      <p>
+        Si miramos solo el circuito ATP — sin contar challengers — la pirámide también
+        es brutal. De los 1.779 jugadores que disputaron al menos un partido ATP entre
+        2000 y 2026, solo 113 llegaron al Top 10. Eso es el 6,4% del total.
+      </p>
+
+      <figure class="post-img">
+        <img src="graficos/top100_piramide.png" alt="Pirámide ATP: ¿qué tan difícil es llegar al Top 100?" />
+        <figcaption>Pirámide de jugadores ATP (2000–2026) por umbral de ranking alcanzado</figcaption>
+      </figure>
+
+      <h2>Los números</h2>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <p class="valor">6.345</p>
+          <p class="desc">jugadores con al menos 1 partido Challenger</p>
+        </div>
+        <div class="stat-box">
+          <p class="valor">687</p>
+          <p class="pct">11%</p>
+          <p class="desc">llegaron al Top 100</p>
+        </div>
+        <div class="stat-box">
+          <p class="valor">113</p>
+          <p class="pct">6,4%</p>
+          <p class="desc">de jugadores ATP llegaron al Top 10</p>
+        </div>
+      </div>
+
+      <h2>Por qué importa</h2>
+
+      <p>
+        Estos números dan contexto a todo lo que pasa en el circuito. Cuando un jugador
+        rankeado #80 pierde en primera ronda de un ATP250, no es un fracaso — es alguien
+        que ya está en el 11% más selectivo del tenis mundial.
+      </p>
+
+      <p>
+        Y cuando vemos a un jugador como Fonseca hacer lo que hace con 18 años, los
+        datos ayudan a entender qué tan extraordinario es: no solo está entre los mejores
+        del mundo en su deporte, sino que lo está haciendo antes de que la mayoría de
+        los que lo intentaron tuvieran su oportunidad.
+      </p>
+
+    </div>
+
+    <a class="back-link" href="index.html">← Volver al inicio</a>
+
+  </article>
+
+  <footer>
+    <p>Tenis in Data · Análisis del circuito <span>ATP</span></p>
+  </footer>
+
+</body>
+</html>
