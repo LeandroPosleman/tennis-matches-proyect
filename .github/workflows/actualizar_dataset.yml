@@ -1,0 +1,80 @@
+name: Actualizar dataset ATP
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"  # Lunes 9:00am BsAs (UTC-3)
+  workflow_dispatch:       # Permite ejecutarlo manualmente
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install kaggle pandas
+
+      - name: Configurar credenciales Kaggle
+        run: |
+          mkdir -p ~/.kaggle
+          echo '{"username":"${{ secrets.KAGGLE_USERNAME }}","key":"${{ secrets.KAGGLE_KEY }}"}' > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
+
+      - name: Descargar y actualizar dataset
+        run: python scripts/actualizar_dataset.py
+
+      - name: Actualizar README.md y CLAUDE.md
+        run: |
+          TOTAL=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(len(rows))")
+          FECHA=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(rows[-1][1])")
+
+          echo "Total de partidos: $TOTAL"
+          echo "Último partido: $FECHA"
+
+          # Actualizar README.md
+          sed -i "s/El archivo data\/matches_atp\.csv contiene ~[0-9.]* partidos[^.]*\./El archivo data\/matches_atp.csv contiene ~$(echo $TOTAL | sed 's/\([0-9]\{3\}\)$\/.\1/') partidos hasta $FECHA./" README.md || true
+          python -c "
+          import re, pathlib
+          content = pathlib.Path('README.md').read_text(encoding='utf-8')
+          total = '$TOTAL'
+          fecha = '$FECHA'
+          content = re.sub(
+              r'El archivo data/matches_atp\.csv contiene ~[\d\.]+ partidos[^.]*\.',
+              f'El archivo data/matches_atp.csv contiene ~{int(total):,} partidos hasta {fecha}.'.replace(',', '.'),
+              content
+          )
+          pathlib.Path('README.md').write_text(content, encoding='utf-8')
+          "
+
+          # Actualizar CLAUDE.md
+          python -c "
+          import re, pathlib
+          content = pathlib.Path('CLAUDE.md').read_text(encoding='utf-8')
+          total = '$TOTAL'
+          fecha = '$FECHA'
+          content = re.sub(r'- \*\*Hasta:\*\*.*', f'- **Hasta:** {fecha} (ultima entrada registrada)', content)
+          content = re.sub(r'- \*\*Total de partidos:\*\*.*', f'- **Total de partidos:** ~{int(total):,} filas'.replace(',', '.'), content)
+          pathlib.Path('CLAUDE.md').write_text(content, encoding='utf-8')
+          "
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet data/matches_atp.csv; then
+            echo "No hubo cambios en el dataset, no se hace commit."
+          else
+            FECHA=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(rows[-1][1])")
+            git add data/matches_atp.csv README.md CLAUDE.md
+            git commit -m "chore: actualizar dataset a $FECHA [lunes automatico]"
+            git push
+            echo "Dataset actualizado y pusheado."
+          fi
