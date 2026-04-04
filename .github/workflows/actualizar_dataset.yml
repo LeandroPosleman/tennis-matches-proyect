@@ -77,7 +77,7 @@ jobs:
             echo "No hubo cambios en el dataset, no se hace commit."
           else
             FECHA=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(rows[-1][1])")
-            git pull --rebase
+            git pull --rebase --autostash
             git add data/matches_atp.csv README.md CLAUDE.md
             git commit -m "chore: actualizar dataset a $FECHA [lunes automatico]"
             git push
