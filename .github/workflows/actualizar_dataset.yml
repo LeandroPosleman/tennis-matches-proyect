@@ -97,24 +97,25 @@ jobs:
           else
             FECHA=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(rows[-1][1])")
 
-            # Guardar archivos modificados
+            # Guardar archivos actualizados en /tmp
             cp data/matches_atp.csv /tmp/matches_atp.csv
             cp data/matches_challenger_atp.csv /tmp/matches_challenger_atp.csv
             cp README.md /tmp/README.md
             cp CLAUDE.md /tmp/CLAUDE.md
 
-            # Sincronizar con el estado más reciente del remote
-            git fetch origin
-            git reset --hard origin/master
-
-            # Restaurar archivos actualizados
-            cp /tmp/matches_atp.csv data/matches_atp.csv
-            cp /tmp/matches_challenger_atp.csv data/matches_challenger_atp.csv
-            cp /tmp/README.md README.md
-            cp /tmp/CLAUDE.md CLAUDE.md
-
-            git add data/matches_atp.csv data/matches_challenger_atp.csv README.md CLAUDE.md
-            git commit -m "chore: actualizar dataset a $FECHA [lunes automatico]"
-            git push
-            echo "Dataset actualizado y pusheado."
+            # Reintentar hasta 5 veces por si hay conflicto de push
+            for i in 1 2 3 4 5; do
+              echo "Intento $i de push..."
+              git fetch origin
+              git reset --hard origin/master
+              cp /tmp/matches_atp.csv data/matches_atp.csv
+              cp /tmp/matches_challenger_atp.csv data/matches_challenger_atp.csv
+              cp /tmp/README.md README.md
+              cp /tmp/CLAUDE.md CLAUDE.md
+              git add data/matches_atp.csv data/matches_challenger_atp.csv README.md CLAUDE.md
+              git commit -m "chore: actualizar dataset a $FECHA [lunes automatico]"
+              git push && echo "Push exitoso." && break
+              echo "Push fallido, reintentando..."
+              git reset --soft HEAD~1
+            done
           fi
