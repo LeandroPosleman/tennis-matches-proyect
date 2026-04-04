@@ -5,6 +5,10 @@ on:
     - cron: "0 12 * * 1"  # Lunes 9:00am BsAs (UTC-3)
   workflow_dispatch:       # Permite ejecutarlo manualmente
 
+concurrency:
+  group: actualizar-dataset
+  cancel-in-progress: true
+
 jobs:
   actualizar:
     runs-on: ubuntu-latest
