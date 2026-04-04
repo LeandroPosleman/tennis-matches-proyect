@@ -41,6 +41,21 @@ jobs:
       - name: Descargar y actualizar dataset
         run: python scripts/actualizar_dataset.py
 
+      - name: Regenerar matches_challenger_atp.csv
+        run: |
+          python -c "
+          import pandas as pd
+          df_combined = pd.read_csv('data/matches_challenger_atp.csv', low_memory=False)
+          df_challenger = df_combined[df_combined['Series'] == 'Challenger'].copy()
+          df_atp = pd.read_csv('data/matches_atp.csv', low_memory=False)
+          df_new = pd.concat([df_atp, df_challenger], ignore_index=True)
+          df_new['Date'] = pd.to_datetime(df_new['Date'], errors='coerce')
+          df_new = df_new.sort_values('Date').reset_index(drop=True)
+          df_new['Date'] = df_new['Date'].dt.strftime('%Y-%m-%d')
+          df_new.to_csv('data/matches_challenger_atp.csv', index=False)
+          print(f'matches_challenger_atp.csv regenerado: {len(df_new)} filas')
+          "
+
       - name: Actualizar README.md y CLAUDE.md
         run: |
           TOTAL=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(len(rows))")
@@ -81,7 +96,7 @@ jobs:
             echo "No hubo cambios en el dataset, no se hace commit."
           else
             FECHA=$(python -c "import csv; f=open('data/matches_atp.csv'); r=csv.reader(f); next(r); rows=list(r); print(rows[-1][1])")
-            git add data/matches_atp.csv README.md CLAUDE.md
+            git add data/matches_atp.csv data/matches_challenger_atp.csv README.md CLAUDE.md
             git commit -m "chore: actualizar dataset a $FECHA [lunes automatico]"
             git push
             echo "Dataset actualizado y pusheado."
