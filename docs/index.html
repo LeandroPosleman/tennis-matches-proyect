@@ -1,26 +1,51 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tenis in Data</title>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --amarillo:  #D9EF00;
-      --verde-osc: #00342B;
-      --verde-med: #03664F;
-      --crema:     #FFFDEE;
+      --bg:        #FFFDEE;
+      --bg-header: rgba(255, 253, 238, 0.90);
+      --text:      #00342B;
+      --text-sec:  #03664F;
+      --border:    rgba(0, 52, 43, 0.08);
+      --border-hd: rgba(0, 52, 43, 0.10);
+      --input-bg:  #ffffff;
+      --input-bdr: rgba(0, 52, 43, 0.25);
+      --input-ph:  rgba(0, 52, 43, 0.35);
+    }
+
+    [data-theme="dark"] {
+      --bg:        #001a14;
+      --bg-header: rgba(0, 26, 20, 0.92);
+      --text:      #FFFDEE;
+      --text-sec:  #7dc4ad;
+      --border:    rgba(255, 253, 238, 0.08);
+      --border-hd: rgba(255, 253, 238, 0.10);
+      --input-bg:  #002a1f;
+      --input-bdr: rgba(255, 253, 238, 0.20);
+      --input-ph:  rgba(255, 253, 238, 0.30);
     }
 
     body {
-      background-color: var(--crema);
-      color: var(--verde-osc);
+      background-color: var(--bg);
+      color: var(--text);
       font-family: 'Georgia', serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      transition: background-color 0.2s, color 0.2s;
     }
 
     /* ── HEADER ───────────────────────────────── */
@@ -28,10 +53,11 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 253, 238, 0.90);
+      background: var(--bg-header);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 52, 43, 0.10);
+      border-bottom: 1px solid var(--border-hd);
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .site-nav {
@@ -48,11 +74,12 @@
       font-family: 'Georgia', serif;
       font-size: 1.05rem;
       font-weight: bold;
-      color: var(--verde-osc);
+      color: var(--text);
       text-decoration: none;
       letter-spacing: -0.2px;
+      transition: color 0.15s;
     }
-    .site-brand:hover { color: var(--verde-med); }
+    .site-brand:hover { color: var(--text-sec); }
 
     .nav-links {
       display: flex;
@@ -64,12 +91,26 @@
       font-family: 'Arial', sans-serif;
       font-size: 0.8rem;
       letter-spacing: 0.5px;
-      color: var(--verde-med);
+      color: var(--text-sec);
       text-decoration: none;
       transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--verde-osc); }
-    .nav-links a.active { color: var(--verde-osc); font-weight: bold; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: bold; }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-sec);
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+    }
+    .theme-toggle:hover { color: var(--text); }
 
     /* ── MAIN ─────────────────────────────────── */
     main {
@@ -82,20 +123,20 @@
     /* ── HERO ─────────────────────────────────── */
     .page-hero {
       padding: 56px 0 40px;
-      border-bottom: 1px solid rgba(0, 52, 43, 0.08);
+      border-bottom: 1px solid var(--border);
     }
 
     .page-hero h1 {
       font-size: 2.6rem;
       line-height: 1.1;
       letter-spacing: -0.8px;
-      color: var(--verde-osc);
+      color: var(--text);
       margin-bottom: 12px;
     }
 
     .page-hero .hero-sub {
       font-size: 1rem;
-      color: var(--verde-med);
+      color: var(--text-sec);
       font-style: italic;
       opacity: 0.8;
     }
@@ -106,7 +147,7 @@
     }
 
     .post-item {
-      border-bottom: 1px solid rgba(0, 52, 43, 0.08);
+      border-bottom: 1px solid var(--border);
     }
 
     .post-item > a {
@@ -127,7 +168,7 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--verde-med);
+      color: var(--text-sec);
       margin-bottom: 10px;
       opacity: 0.85;
     }
@@ -135,13 +176,13 @@
     .post-item h2 {
       font-size: 1.55rem;
       line-height: 1.25;
-      color: var(--verde-osc);
+      color: var(--text);
       margin-bottom: 8px;
       transition: color 0.2s;
       font-weight: normal;
     }
 
-    .post-item > a:hover h2 { color: var(--verde-med); }
+    .post-item > a:hover h2 { color: var(--text-sec); }
 
     .post-item:first-child h2 {
       font-size: 2rem;
@@ -150,7 +191,7 @@
     .post-meta {
       font-family: 'Arial', sans-serif;
       font-size: 0.75rem;
-      color: var(--verde-med);
+      color: var(--text-sec);
       opacity: 0.65;
       margin-top: 4px;
     }
@@ -161,22 +202,22 @@
       text-align: center;
       font-family: 'Arial', sans-serif;
       font-size: 0.78rem;
-      color: var(--verde-med);
-      border-top: 1px solid rgba(0, 52, 43, 0.10);
+      color: var(--text-sec);
+      border-top: 1px solid var(--border-hd);
     }
 
-    footer span { color: var(--verde-osc); }
+    footer span { color: var(--text); }
 
     /* ── SUSCRIPCIÓN ─────────────────────────── */
     .subscribe-section {
       margin-top: 0;
       padding: 40px 0 0;
-      border-top: 1px solid rgba(0, 52, 43, 0.08);
+      border-top: 1px solid var(--border);
     }
 
     .subscribe-section h3 {
       font-size: 1.2rem;
-      color: var(--verde-osc);
+      color: var(--text);
       margin-bottom: 6px;
       font-weight: normal;
     }
@@ -184,7 +225,7 @@
     .subscribe-section p {
       font-family: 'Arial', sans-serif;
       font-size: 0.85rem;
-      color: var(--verde-med);
+      color: var(--text-sec);
       margin-bottom: 20px;
       opacity: 0.85;
     }
@@ -198,27 +239,27 @@
     .subscribe-form input[type="email"] {
       flex: 1;
       padding: 10px 14px;
-      border: 1px solid rgba(0, 52, 43, 0.25);
-      background: white;
-      color: var(--verde-osc);
+      border: 1px solid var(--input-bdr);
+      background: var(--input-bg);
+      color: var(--text);
       font-family: 'Arial', sans-serif;
       font-size: 0.85rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
 
     .subscribe-form input[type="email"]:focus {
-      border-color: var(--verde-med);
+      border-color: var(--text-sec);
     }
 
     .subscribe-form input[type="email"]::placeholder {
-      color: rgba(0, 52, 43, 0.35);
+      color: var(--input-ph);
     }
 
     .subscribe-form button {
       padding: 10px 20px;
       background: var(--amarillo);
-      color: var(--verde-osc);
+      color: #00342B;
       border: none;
       font-family: 'Arial', sans-serif;
       font-size: 0.8rem;
@@ -237,8 +278,8 @@
       min-height: 18px;
     }
 
-    .subscribe-msg.ok  { color: var(--verde-med); }
-    .subscribe-msg.err { color: #c0392b; }
+    .subscribe-msg.ok  { color: var(--text-sec); }
+    .subscribe-msg.err { color: #e05c4b; }
 
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 600px) {
@@ -259,6 +300,7 @@
       <div class="nav-links">
         <a href="analisis.html">Análisis</a>
         <a href="sobre.html">Sobre</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀︎</button>
       </div>
     </nav>
   </header>
@@ -323,6 +365,23 @@
   </footer>
 
   <script>
+    // ── Dark mode toggle ──
+    var toggle = document.getElementById('theme-toggle');
+    var html   = document.documentElement;
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'dark' ? '☽' : '☀︎';
+      localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(html.getAttribute('data-theme') || 'light');
+
+    toggle.addEventListener('click', function() {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Mailchimp ──
     document.getElementById('mc-form').addEventListener('submit', function(e) {
       e.preventDefault();
       var email = document.getElementById('mc-email').value;
