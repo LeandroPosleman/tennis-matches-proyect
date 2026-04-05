@@ -316,6 +316,60 @@
       .nav-links { gap: 16px; }
       .dato-destacado .numero { font-size: 2.2rem; }
     }
+
+    /* ── SUSCRIPCIÓN ─────────────────────────── */
+    .subscribe-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .subscribe-section h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-weight: normal;
+    }
+    .subscribe-section p {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
+    .subscribe-form {
+      display: flex;
+      gap: 10px;
+      max-width: 480px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid rgba(0, 52, 43, 0.25);
+      background: #ffffff;
+      color: var(--text);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    [data-theme="dark"] .subscribe-form input[type="email"] {
+      background: #002a1f;
+      border-color: rgba(255, 253, 238, 0.20);
+    }
+    .subscribe-form input[type="email"]:focus { border-color: var(--text-sec); }
+    .subscribe-form button {
+      padding: 10px 20px;
+      background: #D9EF00;
+      color: #00342B;
+      border: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .subscribe-form button:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
@@ -425,6 +479,17 @@
     </div>
 
     <a class="back-link" href="index.html">&larr; Volver al inicio</a>
+
+    <div class="subscribe-section">
+      <h3>Recibí los análisis en tu correo</h3>
+      <p>Sin spam. Solo cuando haya algo nuevo para contar.</p>
+      <form class="subscribe-form" action="https://blog.us3.list-manage.com/subscribe/post" method="POST" target="_blank">
+        <input type="hidden" name="u" value="d1bca54b98ac13ff1babefce7" />
+        <input type="hidden" name="id" value="ab3a3f9608" />
+        <input type="email" name="EMAIL" placeholder="tu@email.com" required />
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
 
   </article>
 
