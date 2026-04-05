@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
+  <script>
     (function() {
       var saved = localStorage.getItem('theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
     })();
   </script>
-<title>Análisis · Tenis in Data</title>
+  <title>Temas · Tenis in Data</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
+    :root {
       --amarillo:  #D9EF00;
       --bg:        #FFFDEE;
       --bg-header: rgba(255, 253, 238, 0.90);
@@ -23,9 +23,7 @@
       --text-body: #1a3a30;
       --border:    rgba(0, 52, 43, 0.08);
       --border-hd: rgba(0, 52, 43, 0.10);
-      --border-img: rgba(0, 52, 43, 0.12);
-      --caption:   #6a9a88;
-      --card-bg:   rgba(0, 52, 43, 0.04);
+      --card-bg:   rgba(0, 52, 43, 0.03);
       --card-bdr:  rgba(0, 52, 43, 0.10);
     }
 
@@ -37,9 +35,7 @@
       --text-body: #c8e0d8;
       --border:    rgba(255, 253, 238, 0.08);
       --border-hd: rgba(255, 253, 238, 0.10);
-      --border-img: rgba(255, 253, 238, 0.12);
-      --caption:   #7dc4ad;
-      --card-bg:   rgba(255, 253, 238, 0.04);
+      --card-bg:   rgba(255, 253, 238, 0.03);
       --card-bdr:  rgba(255, 253, 238, 0.10);
     }
 
@@ -48,9 +44,9 @@
       color: var(--text);
       font-family: 'Georgia', serif;
       min-height: 100vh;
-      transition: background-color 0.2s, color 0.2s;
       display: flex;
       flex-direction: column;
+      transition: background-color 0.2s, color 0.2s;
     }
 
     /* ── HEADER ───────────────────────────────── */
@@ -101,6 +97,20 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active { color: var(--text); font-weight: bold; }
 
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-sec);
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+    }
+    .theme-toggle:hover { color: var(--text); }
+
     /* ── MAIN ─────────────────────────────────── */
     main {
       max-width: 900px;
@@ -119,75 +129,83 @@
       line-height: 1.15;
       letter-spacing: -0.5px;
       color: var(--text);
-    }
-
-    /* ── POST LIST ────────────────────────────── */
-    .post-list {
-      list-style: none;
-    }
-
-    .post-item {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .post-item > a {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 28px;
-      align-items: center;
-      text-decoration: none;
-      padding: 32px 0;
-      transition: transform 0.2s ease-out;
-      color: inherit;
-    }
-
-    .post-item > a:hover {
-      transform: translateY(-2px);
-    }
-
-    .post-thumb {
-      width: 100%;
-      border-radius: 4px;
-      border: 1px solid var(--border-img);
-      display: block;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-    }
-
-    .post-text .post-tag {
-      display: block;
-      font-family: 'Arial', sans-serif;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--verde-med);
-      margin-bottom: 10px;
-      opacity: 0.85;
-    }
-
-    .post-text h2 {
-      font-size: 1.2rem;
-      line-height: 1.3;
-      color: var(--text);
       margin-bottom: 8px;
-      transition: color 0.2s;
-      font-weight: normal;
     }
 
-    .post-item > a:hover h2 { color: var(--verde-med); }
-
-    .post-text p {
+    .page-hero p {
+      font-family: 'Arial', sans-serif;
       font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--text-body);
-      margin-bottom: 10px;
+      color: var(--text-sec);
+      opacity: 0.8;
     }
 
-    .post-meta {
+    /* ── TOPICS ───────────────────────────────── */
+    .topic-section {
+      padding: 40px 0 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+    }
+
+    .topic-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .topic-header h2 {
+      font-size: 1.3rem;
+      font-weight: normal;
+      color: var(--text);
+    }
+
+    .topic-count {
       font-family: 'Arial', sans-serif;
       font-size: 0.75rem;
       color: var(--text-sec);
-      opacity: 0.65;
+      opacity: 0.6;
+    }
+
+    .topic-posts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .topic-post {
+      border-top: 1px solid var(--border);
+    }
+
+    .topic-post a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      text-decoration: none;
+      padding: 16px 0;
+      color: inherit;
+      transition: transform 0.15s ease-out;
+    }
+
+    .topic-post a:hover { transform: translateX(4px); }
+
+    .topic-post h3 {
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--text);
+      transition: color 0.15s;
+      line-height: 1.4;
+    }
+
+    .topic-post a:hover h3 { color: var(--text-sec); }
+
+    .topic-post .post-meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-sec);
+      opacity: 0.55;
+      white-space: nowrap;
     }
 
     /* ── FOOTER ───────────────────────────────── */
@@ -202,28 +220,13 @@
 
     footer span { color: var(--text); }
 
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      color: var(--text-sec);
-      padding: 4px;
-      line-height: 1;
-      transition: color 0.15s;
-      display: flex;
-      align-items: center;
-    }
-    .theme-toggle:hover { color: var(--text); }
-
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 600px) {
       .theme-toggle { font-size: 1.5rem; padding: 8px; }
       .page-hero { padding: 36px 0 28px; }
       .nav-links { gap: 16px; }
-      .post-item > a { grid-template-columns: 1fr; gap: 16px; }
-      .post-thumb { aspect-ratio: 16/7; }
+      .topic-post a { flex-direction: column; gap: 4px; }
+      .topic-post .post-meta { white-space: normal; }
     }
   </style>
 </head>
@@ -233,9 +236,9 @@
     <nav class="site-nav">
       <a href="index.html" class="site-brand">Tenis in Data</a>
       <div class="nav-links">
-        <a href="analisis.html" class="active">Análisis</a>
+        <a href="analisis.html" class="active">Temática</a>
         <a href="sobre.html">Sobre</a>
-              <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☼︎</button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☼︎</button>
       </div>
     </nav>
   </header>
@@ -243,58 +246,51 @@
   <main>
 
     <div class="page-hero">
-      <h1>Todos los análisis</h1>
+      <h1>Temática</h1>
+      <p>Explorá los posts por categoría.</p>
     </div>
 
-    <ul class="post-list">
+    <div class="topic-section">
+      <div class="topic-header">
+        <h2>Análisis</h2>
+        <span class="topic-count">3 posts</span>
+      </div>
+      <ul class="topic-posts">
+        <li class="topic-post">
+          <a href="jugadores-ilogicos.html">
+            <h3>¿Quién es el jugador más ilógico del tenis?</h3>
+            <span class="post-meta">Marzo 2026</span>
+          </a>
+        </li>
+        <li class="topic-post">
+          <a href="sinner-vs-fonseca.html">
+            <h3>Sinner vs Fonseca: ¿quién tuvo los mejores primeros 2 años?</h3>
+            <span class="post-meta">Febrero 2026</span>
+          </a>
+        </li>
+        <li class="topic-post">
+          <a href="cuantos-llegan-al-top100.html">
+            <h3>¿Cuántos tenistas llegan realmente al Top 100?</h3>
+            <span class="post-meta">Marzo 2026</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <li class="post-item">
-        <a href="bucharest-smash-it-parte1.html">
-          <div class="post-text" style="grid-column: 1 / -1;">
-            <span class="post-tag">Machine Learning · Fantasy · ATP 250</span>
-            <h2>Bucharest con datos: armé mi equipo de Smash It con machine learning</h2>
-            <p class="post-meta">Marzo 2026 · 2 partes</p>
-          </div>
-        </a>
-      </li>
-
-      <li class="post-item">
-        <a href="jugadores-ilogicos.html">
-          <img class="post-thumb" src="graficos/jugador_mas_ilogico.png" alt="Jugadores más ilógicos del ATP" />
-          <div class="post-text">
-            <span class="post-tag">Rankings · ATP 2010–2026</span>
-            <h2>¿Quién es el jugador más ilógico del tenis?</h2>
-            <p>Medimos quién le gana más seguido a rivales mejor rankeados de forma consistente, ponderando por importancia del torneo.</p>
-            <p class="post-meta">Marzo 2026</p>
-          </div>
-        </a>
-      </li>
-
-      <li class="post-item">
-        <a href="sinner-vs-fonseca.html">
-          <img class="post-thumb" src="graficos/sinner_vs_fonseca_ranking.png" alt="Sinner vs Fonseca ranking" />
-          <div class="post-text">
-            <span class="post-tag">Comparativa · Jóvenes talentos</span>
-            <h2>Sinner vs Fonseca: ¿quién tuvo los mejores primeros 2 años?</h2>
-            <p>Victorias, títulos y evolución del ranking: los primeros 24 meses de dos generaciones distintas.</p>
-            <p class="post-meta">Febrero 2025</p>
-          </div>
-        </a>
-      </li>
-
-      <li class="post-item">
-        <a href="cuantos-llegan-al-top100.html">
-          <img class="post-thumb" src="graficos/funnel_challenger_top100_v2.png" alt="Cuántos llegan al Top 100" />
-          <div class="post-text">
-            <span class="post-tag">Estructura del circuito</span>
-            <h2>¿Cuántos tenistas llegan realmente al Top 100?</h2>
-            <p>De cada 100 jugadores que disputan un Challenger, solo 11 llegan al Top 100.</p>
-            <p class="post-meta">2025</p>
-          </div>
-        </a>
-      </li>
-
-    </ul>
+    <div class="topic-section">
+      <div class="topic-header">
+        <h2>Machine Learning</h2>
+        <span class="topic-count">1 post</span>
+      </div>
+      <ul class="topic-posts">
+        <li class="topic-post">
+          <a href="bucharest-smash-it-parte1.html">
+            <h3>Bucharest con datos: armé mi equipo de Smash It con machine learning</h3>
+            <span class="post-meta">Marzo 2026</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
   </main>
 
