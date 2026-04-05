@@ -352,11 +352,12 @@
     <div class="subscribe-section">
       <h3>Recibí los análisis en tu correo</h3>
       <p>Sin spam. Solo cuando haya algo nuevo para contar.</p>
-      <form class="subscribe-form" id="mc-form">
-        <input type="email" id="mc-email" placeholder="tu@email.com" required />
+      <form class="subscribe-form" action="https://blog.us3.list-manage.com/subscribe/post" method="POST" target="_blank">
+        <input type="hidden" name="u" value="d1bca54b98ac13ff1babefce7" />
+        <input type="hidden" name="id" value="ab3a3f9608" />
+        <input type="email" name="EMAIL" placeholder="tu@email.com" required />
         <button type="submit">Suscribirme</button>
       </form>
-      <div class="subscribe-msg" id="mc-msg"></div>
     </div>
 
   </main>
@@ -382,59 +383,6 @@
       applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
 
-    // ── Mailchimp ──
-    document.getElementById('mc-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var email = document.getElementById('mc-email').value;
-      var msg   = document.getElementById('mc-msg');
-      var btn   = this.querySelector('button');
-
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      msg.textContent = '';
-      msg.className = 'subscribe-msg';
-
-      var url = 'https://blog.us3.list-manage.com/subscribe/post-json'
-              + '?u=d1bca54b98ac13ff1babefce7'
-              + '&id=ab3a3f9608'
-              + '&EMAIL=' + encodeURIComponent(email)
-              + '&c=mcCallback';
-
-      function reset(errMsg) {
-        btn.disabled = false;
-        btn.textContent = 'Suscribirme';
-        if (errMsg) {
-          msg.textContent = errMsg;
-          msg.className = 'subscribe-msg err';
-        }
-        clearTimeout(timer);
-      }
-
-      window.mcCallback = function(data) {
-        reset();
-        if (data.result === 'success') {
-          msg.textContent = '¡Listo! Te vas a enterar cuando haya algo nuevo.';
-          msg.className = 'subscribe-msg ok';
-          document.getElementById('mc-email').value = '';
-        } else {
-          var text = data.msg || 'Algo salió mal, intentá de nuevo.';
-          if (text.indexOf('already subscribed') !== -1) {
-            text = 'Este email ya está suscripto.';
-          }
-          msg.textContent = text;
-          msg.className = 'subscribe-msg err';
-        }
-      };
-
-      var script = document.createElement('script');
-      script.src = url;
-      script.onerror = function() { reset('No se pudo conectar. Intentá de nuevo.'); };
-      document.body.appendChild(script);
-
-      var timer = setTimeout(function() {
-        reset('No se pudo conectar. Intentá de nuevo.');
-      }, 8000);
-    });
   </script>
 
 </body>
