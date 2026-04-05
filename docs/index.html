@@ -400,9 +400,18 @@
               + '&EMAIL=' + encodeURIComponent(email)
               + '&c=mcCallback';
 
-      window.mcCallback = function(data) {
+      function reset(errMsg) {
         btn.disabled = false;
         btn.textContent = 'Suscribirme';
+        if (errMsg) {
+          msg.textContent = errMsg;
+          msg.className = 'subscribe-msg err';
+        }
+        clearTimeout(timer);
+      }
+
+      window.mcCallback = function(data) {
+        reset();
         if (data.result === 'success') {
           msg.textContent = '¡Listo! Te vas a enterar cuando haya algo nuevo.';
           msg.className = 'subscribe-msg ok';
@@ -419,7 +428,12 @@
 
       var script = document.createElement('script');
       script.src = url;
+      script.onerror = function() { reset('No se pudo conectar. Intentá de nuevo.'); };
       document.body.appendChild(script);
+
+      var timer = setTimeout(function() {
+        reset('No se pudo conectar. Intentá de nuevo.');
+      }, 8000);
     });
   </script>
 
