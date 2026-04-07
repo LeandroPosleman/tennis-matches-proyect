@@ -81,8 +81,42 @@ C_CREMA     = "#FFFDEE"  # crema claro             → fondo de figura y ejes
 - Color de texto principal y spines: `C_VERDE_OSC`
 - Grilla: `C_VERDE_MED` con alpha bajo
 
+## Dataset combinado: data/matches_challenger_atp.csv
+
+Generado por `scripts/integrar_challenger.py`. Combina `matches_atp.csv` con datos Challenger (Sackmann, 2000–2024).
+
+### Columnas adicionales respecto a matches_atp.csv
+
+| Columna | Valores | Descripcion |
+|---------|---------|-------------|
+| `source` | `"atp_original"` / `"sackmann"` | Origen de cada fila |
+
+### Composición
+
+| Source | Filas | Descripción |
+|--------|-------|-------------|
+| `atp_original` | ~67.400 | Partidos ATP de matches_atp.csv (con cuotas) |
+| `sackmann` | ~174.000 | Partidos del archivo Sackmann (Challenger + ATP/GS/Masters del mismo archivo) |
+
+### ADVERTENCIA: problema de nombres entre fuentes
+
+Los nombres en `matches_atp.csv` (formato `"Apellido I."` de la fuente original) y los del Sackmann (convertidos via `to_last_initial()`) **no siempre coinciden**. Casos problemáticos:
+- Apellidos compuestos: `"Agut R.B."` (Sackmann) vs `"Bautista R."` (ATP) → Roberto Bautista Agut
+- Doble apellido: `"Aliassime F.A."` vs `"Auger-Aliassime F."`
+- ~439 jugadores Top 100 tienen este mismatch
+
+**Regla crítica para análisis combinados:**
+- **USA `matches_challenger_atp.csv` como fuente única.** Nunca cruces `matches_atp.csv` con datos Sackmann directamente por nombre de jugador.
+- Para filtrar solo Challenger: `df[df['Series'] == 'Challenger']`
+- Para filtrar solo ATP original (con cuotas): `df[df['source'] == 'atp_original']`
+- El campo `source` te dice de dónde viene cada fila.
+
+### Notas sobre el Sackmann en el combined
+
+El archivo Sackmann contiene partidos de nivel Challenger (`C`) pero también ATP (`A`, `G`, `M`). Todos están incluidos en el combined porque los partidos ATP de Sackmann usan el mismo formato de nombres que los Challenger, lo que permite cruzar jugadores entre ambos circuitos correctamente.
+
 ## Notas de desarrollo
 
 - Usar Python con `pandas` para manipular el CSV dado su tamaño (8.5MB).
 - Al filtrar por ganador, comparar con `Player_1` o `Player_2` directamente (columna `Winner` contiene el nombre exacto del ganador).
-- Para modelos predictivos, las cuotas de apuesta (`Odd_1`, `Odd_2`) son un buen proxy de probabilidad de victoria pre-partido.
+- Para modelos predictivos, las cuotas de apuesta (`Odd_1`, `Odd_2`) son un buen proxy de probabilidad de victoria pre-partido. Solo disponibles en filas con `source == "atp_original"`.

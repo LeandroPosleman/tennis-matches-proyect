@@ -120,6 +120,8 @@ df_chall_fmt = df_chall[COLS].copy()
 
 # ── Leer dataset original ─────────────────────────────────────────────────────
 df_orig = pd.read_csv(os.path.join(DATA_DIR, "matches_atp.csv"), low_memory=False)
+df_orig["source"] = "atp_original"
+df_chall_fmt["source"] = "sackmann"
 
 # ── Combinar y ordenar ────────────────────────────────────────────────────────
 df_combined = pd.concat([df_orig, df_chall_fmt], ignore_index=True)
