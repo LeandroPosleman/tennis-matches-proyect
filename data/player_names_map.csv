@@ -1,0 +1,74 @@
+variant,canonical,reason,source_type
+Al-Ghareeb M.,Al Ghareeb M.,normalize_identical,atp_internal
+Aragone JC,Aragone J.C.,normalize_identical,atp_internal
+Bogomolov Jr.A.,Bogomolov Jr. A.,normalize_identical,atp_internal
+Carreno-Busta P.,Carreno Busta P.,normalize_identical,atp_internal
+De Chaunac S.,de Chaunac S.,normalize_identical,atp_internal
+Deheart R.,De Heart R.,normalize_identical,atp_internal
+Del Bonis F.,Delbonis F.,normalize_identical,atp_internal
+Del Potro J. M.,Del Potro J.M.,normalize_identical,atp_internal
+de Voest R.,De Voest R.,normalize_identical,atp_internal
+Dev Varman S.,Devvarman S.,normalize_identical,atp_internal
+Di Mauro A.,di Mauro A.,normalize_identical,atp_internal
+Di Pasquale A.,di Pasquale A.,normalize_identical,atp_internal
+Gambill J. M.,Gambill J.M.,normalize_identical,atp_internal
+Granollers Pujol G.,Granollers-Pujol G.,normalize_identical,atp_internal
+Herbert P-H.,Herbert P.H.,normalize_identical,atp_internal
+Herbert P.H,Herbert P.H.,normalize_identical,atp_internal
+Hernandez-Fernandez J.,Hernandez-Fernandez J,normalize_identical,atp_internal
+Kim K,Kim K.,normalize_identical,atp_internal
+Kohlschreiber P..,Kohlschreiber P.,normalize_identical,atp_internal
+Marin J.A,Marin J.A.,normalize_identical,atp_internal
+McClune M.,Mcclune M.,normalize_identical,atp_internal
+Munoz De La Nava D.,Munoz-De La Nava D.,normalize_identical,atp_internal
+Munoz de La Nava D.,Munoz-De La Nava D.,normalize_identical,atp_internal
+Munoz de la Nava D.,Munoz-De La Nava D.,normalize_identical,atp_internal
+Ramirez Hidalgo R.,Ramirez-Hidalgo R.,normalize_identical,atp_internal
+Stebe C-M.,Stebe C.M.,normalize_identical,atp_internal
+Struff J-L.,Struff J.L.,normalize_identical,atp_internal
+Tseng C. H.,Tseng C.H.,normalize_identical,atp_internal
+Van der Merwe I.,Van Der Merwe I.,normalize_identical,atp_internal
+Van Lottum J.,van Lottum J.,normalize_identical,atp_internal
+Varillas J. P.,Varillas J.P.,normalize_identical,atp_internal
+Wang Y.Jr.,Wang Y. Jr,normalize_identical,atp_internal
+Zayid M.S.,Zayid M. S.,normalize_identical,atp_internal
+Zhang Ze.,Zhang Ze,normalize_identical,atp_internal
+Ferrero J.,Ferrero J.C.,manual_confirmed,atp_internal
+Mathieu P.,Mathieu P.H.,manual_confirmed,atp_internal
+Lisnard J.,Lisnard J.R.,manual_confirmed,atp_internal
+Chela J.,Chela J.I.,manual_confirmed,atp_internal
+Andersen J.,Andersen J.F.,manual_confirmed,atp_internal
+Scherrer J.,Scherrer J.C.,manual_confirmed,atp_internal
+Guzman J.,Guzman J.P.,manual_confirmed,atp_internal
+Wang Y.,Wang Y.T.,manual_confirmed,atp_internal
+Lu Y.,Lu Y.H.,manual_confirmed,atp_internal
+Van D. Merwe I.,Van Der Merwe I.,manual_confirmed,atp_internal
+Dutra Da Silva R.,Dutra Silva R.,manual_confirmed,atp_internal
+Qureshi A.,Qureshi A.U.H.,manual_confirmed,atp_internal
+Viola M.,Viola Mat.,manual_confirmed,atp_internal
+Silva F.,Silva F.F.,manual_confirmed,atp_internal
+Aragone J.,Aragone J.C.,manual_confirmed,atp_internal
+van Lottum J.,Van Lottum J.,manual_confirmed,atp_internal
+Sousa J.,Souza J.,manual_confirmed,atp_internal
+Minaur A.D.,De Minaur A.,manual_confirmed,atp_internal
+Assche L.V.,Van Assche L.,manual_confirmed,atp_internal
+Scheppingen D.V.,van Scheppingen D.,manual_confirmed,atp_internal
+Oconnell C.,O'Connell C.,manual_confirmed,atp_internal
+Galan D.E.,Galan D.,manual_confirmed,atp_internal
+Querrey S.,Querry S.,manual_confirmed,atp_internal
+Bachelot J.F.,Bachelot J.F,fuzzy_96,cross_source
+Rusevski P.,Ruevski P.,fuzzy_95,cross_source
+Burruchaga R.A.,Burruchaga R.,fuzzy_93,cross_source
+Etcheverry T.M.,Etcheverry T.,fuzzy_93,cross_source
+Madaras D.N.,Madaras D.,fuzzy_91,cross_source
+Alvarez E.B.,Alvarez E.,fuzzy_91,cross_source
+Maclagan M.,MacLagan M.,fuzzy_91,cross_source
+Statham J.R.,Statham J.,fuzzy_91,cross_source
+Tsonga J.,Tsonga J.W.,fuzzy_90,cross_source
+Mukund S.K.,Mukund S.,fuzzy_90,cross_source
+Pasquale A.D.,Di Pasquale A.,fuzzy_89,cross_source
+Gomez F.A.,Gomez F.,fuzzy_89,cross_source
+Dellacqua M.,Dell'Acqua M.,fuzzy_88,cross_source
+Querry S.,Querrey S.,manual_confirmed,cross_source
+Hantschk M.,Hantschek M.,manual_confirmed,cross_source
+Chekhov P.,Chekov P.,manual_confirmed,cross_source

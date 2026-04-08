@@ -129,6 +129,21 @@ df_combined["Date"] = pd.to_datetime(df_combined["Date"], errors="coerce")
 df_combined = df_combined.sort_values("Date").reset_index(drop=True)
 df_combined["Date"] = df_combined["Date"].dt.strftime("%Y-%m-%d")
 
+# ── Aplicar mapa de nombres canónicos ────────────────────────────────────────
+map_path = os.path.join(DATA_DIR, "player_names_map.csv")
+if os.path.exists(map_path):
+    name_map = pd.read_csv(map_path)
+    mapping = dict(zip(name_map["variant"].str.strip(), name_map["canonical"].str.strip()))
+    def apply_map(name):
+        name = str(name).strip()
+        return mapping.get(name, name)
+    df_combined["Player_1"] = df_combined["Player_1"].apply(apply_map)
+    df_combined["Player_2"] = df_combined["Player_2"].apply(apply_map)
+    df_combined["Winner"]   = df_combined["Winner"].apply(apply_map)
+    print(f"  Mapa de nombres aplicado ({len(mapping)} entradas)")
+else:
+    print("  AVISO: data/player_names_map.csv no encontrado, nombres sin normalizar")
+
 out_path = os.path.join(DATA_DIR, "matches_challenger_atp.csv")
 df_combined.to_csv(out_path, index=False)
 
