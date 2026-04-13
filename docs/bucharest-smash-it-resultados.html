@@ -411,74 +411,265 @@
         Ahora llegó la hora de la verdad: ¿qué pasó realmente?
       </p>
 
-      <h2>El equipo elegido por el modelo</h2>
+      <h2>Cómo le fue al equipo del modelo</h2>
 
       <table class="equipo-table">
         <thead>
           <tr>
             <th>Jugador</th>
-            <th class="pts">Pts esperados</th>
-            <th class="pts">Pts reales</th>
-            <th class="acierto">Resultado</th>
+            <th class="pts">Créditos</th>
+            <th class="pts">Ronda alcanzada</th>
+            <th class="acierto">Veredicto</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>M. Arnaldi</td>
-            <td class="pts">50.8</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
-          </tr>
-          <tr>
-            <td>D. Dzumhur</td>
-            <td class="pts">47.6</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
-          </tr>
-          <tr>
-            <td>P. Carreno-Busta</td>
-            <td class="pts">46.4</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
-          </tr>
-          <tr>
-            <td>S. Baez</td>
-            <td class="pts">46.2</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
-          </tr>
-          <tr>
             <td>M. Navone</td>
-            <td class="pts">44.7</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
+            <td class="pts">2.4</td>
+            <td class="pts">Campeón</td>
+            <td class="acierto" style="color:#03664F; font-weight:bold;">&#10003;</td>
           </tr>
           <tr>
             <td>F. Marozsan</td>
-            <td class="pts">44.3</td>
-            <td class="pts">—</td>
-            <td class="acierto">—</td>
+            <td class="pts">4.2</td>
+            <td class="pts">Semifinal</td>
+            <td class="acierto" style="color:#03664F; font-weight:bold;">&#10003;</td>
+          </tr>
+          <tr>
+            <td>D. Dzumhur</td>
+            <td class="pts">2.0</td>
+            <td class="pts">Cuartos de final</td>
+            <td class="acierto" style="color:#03664F; font-weight:bold;">&#10003;</td>
+          </tr>
+          <tr>
+            <td>D. Prizmic</td>
+            <td class="pts">1.2</td>
+            <td class="pts">2da ronda</td>
+            <td class="acierto" style="color:#03664F;">&#10003;</td>
+          </tr>
+          <tr>
+            <td>S. Baez</td>
+            <td class="pts">4.4</td>
+            <td class="pts">2da ronda</td>
+            <td class="acierto" style="color:#cc3333;">&#10007;</td>
+          </tr>
+          <tr>
+            <td>M. Arnaldi</td>
+            <td class="pts">2.4</td>
+            <td class="pts">1era ronda</td>
+            <td class="acierto" style="color:#cc3333;">&#10007;</td>
           </tr>
           <tr>
             <td>Total</td>
-            <td class="pts">280.1</td>
-            <td class="pts">—</td>
-            <td class="acierto"></td>
+            <td class="pts">16.6 / 30</td>
+            <td class="pts"></td>
+            <td class="acierto" style="font-weight:bold;">4 de 6</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Qué salió bien</h2>
+      <p>
+        Cuatro de seis jugadores rindieron bien o mejor de lo esperado.
+        El modelo acertó la dirección general: encontró al campeón del torneo a 2.4 créditos,
+        un semifinalista y un cuartofinalista. Los dos fallos fueron Arnaldi (primera ronda)
+        y Baez (segunda ronda).
+      </p>
 
-      <p>[Completar con resultados reales del torneo]</p>
+      <h2>El modelo vs elegir por créditos</h2>
 
-      <h2>Qué falló</h2>
+      <p>
+        Acá está el punto clave. La alternativa más obvia al modelo es la intuición directa:
+        elegir a los jugadores más caros del cuadro, que son los cabezas de serie, los que
+        &ldquo;deberían&rdquo; avanzar más lejos. ¿Cómo habría salido esa estrategia?
+      </p>
 
-      <p>[Completar con resultados reales del torneo]</p>
+      <table class="equipo-table">
+        <thead>
+          <tr>
+            <th>Jugador</th>
+            <th class="pts">Créditos</th>
+            <th class="pts">Seed</th>
+            <th class="pts">Resultado real</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>N. Borges</td>
+            <td class="pts">5.1</td>
+            <td class="pts">[4]</td>
+            <td class="pts">Cayó en 2da ronda</td>
+          </tr>
+          <tr>
+            <td>G. Diallo</td>
+            <td class="pts">5.0</td>
+            <td class="pts">[1]</td>
+            <td class="pts">Cayó en 2da ronda</td>
+          </tr>
+          <tr>
+            <td>S. Baez</td>
+            <td class="pts">4.4</td>
+            <td class="pts">[5]</td>
+            <td class="pts">Cayó en 2da ronda</td>
+          </tr>
+          <tr>
+            <td>F. Marozsan</td>
+            <td class="pts">4.2</td>
+            <td class="pts">[3]</td>
+            <td class="pts">Semifinal</td>
+          </tr>
+          <tr>
+            <td>B. Van De Zandschulp</td>
+            <td class="pts">3.1</td>
+            <td class="pts">[8]</td>
+            <td class="pts">Semifinal</td>
+          </tr>
+          <tr>
+            <td>D. Altmaier</td>
+            <td class="pts">3.0</td>
+            <td class="pts">[6]</td>
+            <td class="pts">Cuartos de final</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td class="pts">24.8 / 30</td>
+            <td class="pts"></td>
+            <td class="pts"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        El equipo &ldquo;por créditos&rdquo; gasta 24.8 créditos y se lleva a los tres primeros
+        cabezas de serie. El problema: Diallo [1], Borges [4] y Baez [5] cayeron todos en
+        segunda ronda. Los 14.5 créditos gastados en ellos tres produjeron puntos de derrota.
+      </p>
+
+      <div class="callout">
+        <p>
+          El modelo pagó 2.4 créditos por Navone, que ganó el torneo entero.
+          Elegir por créditos habría costado 5.0 por Diallo, que cayó en su primer partido.
+          Esa diferencia de 2.6 créditos es también la diferencia entre el máximo puntaje
+          posible del torneo y una eliminación temprana.
+        </p>
+      </div>
+
+      <p>
+        Esto no es casualidad. El modelo descartó a Diallo y Borges explícitamente porque su
+        Elo en arcilla no justificaba el precio. En la
+        <a href="bucharest-smash-it-parte1">parte 1</a> escribimos: &ldquo;los jugadores más
+        caros del cuadro tienen Elo bajo en arcilla comparado con alternativas mucho más
+        baratas&rdquo;. El torneo lo confirmó.
+      </p>
+
+      <h2>Lo que el modelo hizo bien</h2>
+
+      <div class="datos-grid">
+        <div class="dato-card">
+          <div class="jugador">Navone</div>
+          <div class="valor">Campeón</div>
+          <div class="desc">2.4 créditos &middot; seed [7]</div>
+        </div>
+        <div class="dato-card">
+          <div class="jugador">Dzumhur</div>
+          <div class="valor">Cuartos</div>
+          <div class="desc">2.0 créditos &middot; eliminó a Borges [4]</div>
+        </div>
+        <div class="dato-card">
+          <div class="jugador">Marozsan</div>
+          <div class="valor">Semifinal</div>
+          <div class="desc">4.2 créditos &middot; seed [3]</div>
+        </div>
+        <div class="dato-card">
+          <div class="jugador">Prizmic</div>
+          <div class="valor">2da ronda</div>
+          <div class="desc">1.2 créditos &middot; eliminó a Basilashvili</div>
+        </div>
+      </div>
+
+      <p>
+        El modelo encontró al campeón del torneo en la franja de 2.4 créditos. Navone, séptimo
+        preclasificado, venció a O'Connell, Moller, Molcan, Van De Zandschulp y Merida Aguilar
+        para levantar el título. El modelo lo eligió no por su seeding sino por su Elo en
+        arcilla — un dato que los créditos de Smash It no capturan.
+      </p>
+
+      <p>
+        Dzumhur por 2.0 créditos eliminó al cuarto cabeza de serie (Borges, 5.1 créditos)
+        en segunda ronda y llegó a cuartos. Eso es exactamente lo que busca el modelo:
+        jugadores con buen historial en la superficie que el mercado subvalora.
+      </p>
+
+      <h2>Lo que falló</h2>
+
+      <p>
+        Arnaldi cayó en primera ronda contra Molcan 0-2. Era el jugador con más puntos
+        esperados del equipo (50.8) y cero puntos reales. Duele.
+      </p>
+
+      <p>
+        Baez, quinto preclasificado, cayó en segunda ronda contra Droguet. Aunque su Elo
+        en arcilla era alto, el torneo no le fue bien — algo que pasa cuando el cuadro es
+        parejo y las diferencias son chicas.
+      </p>
+
+      <p>
+        Pero acá hay un punto importante: que un pick no haya funcionado en un torneo no
+        significa que fue una mala decisión. Arnaldi y Baez eran picks con probabilidad a
+        favor. En 10.000 simulaciones, ambos daban buen rendimiento en la mayoría. El tenis
+        real se juega una sola vez. El modelo no necesita acertar siempre — necesita acertar
+        <em>en promedio</em>, tomando mejores decisiones que la alternativa.
+      </p>
+
+      <h2>Lo que nadie podía predecir</h2>
+
+      <p>
+        La historia del torneo la escribió Merida Aguilar: un qualifier que venció a
+        Mannarino [2], a Droguet (vía retiro) y a Marozsan [3] para llegar a la final.
+        Ningún modelo razonable puede anticipar que un jugador sin ranking entrará al
+        cuadro por clasificación y eliminará al segundo cabeza de serie.
+      </p>
+
+      <p>
+        Ese tipo de recorrido es lo que hace al tenis impredecible — y es exactamente
+        por lo que un modelo probabilístico es más honesto que una predicción única.
+        El modelo no dijo &ldquo;Navone va a ganar&rdquo;. Dijo &ldquo;Navone tiene buena
+        probabilidad de avanzar lejos dado su nivel en arcilla y su precio&rdquo;. Eso sí
+        se cumplió.
+      </p>
 
       <h2>El veredicto</h2>
 
-      <p>[Completar con conclusiones tras el torneo]</p>
+      <div class="dato-destacado">
+        <div class="numero">15 / 38</div>
+        <div class="label">posición final en la liga de Smash It con el equipo del modelo</div>
+      </div>
+
+      <p>
+        Puesto 15 de 38 jugadores. Mitad superior de la tabla, pero lejos del podio.
+        ¿Es un buen resultado? Depende contra qué lo midas.
+      </p>
+
+      <p>
+        Si la pregunta es &ldquo;¿ganamos la liga?&rdquo;, la respuesta es no.
+        Pero si la pregunta es &ldquo;¿el modelo tomó mejores decisiones que elegir a ojo?&rdquo;,
+        la respuesta es sí. El modelo identificó correctamente que los cabezas de serie
+        caros eran mala inversión en este cuadro. Encontró al campeón en la franja barata.
+        Acertó en 4 de 6 jugadores.
+      </p>
+
+      <p>
+        La diferencia entre el puesto 15 y el puesto 1 no fue la estrategia general —
+        fue la combinatoria específica: qué jugadores se cruzaron en qué ronda, quién
+        tuvo un buen o mal día. El tipo de varianza que se promedia con más torneos.
+      </p>
+
+      <div class="callout">
+        <p>
+          Un modelo no gana un torneo de fantasy. Gana una temporada. Con más torneos,
+          la ventaja sistemática de elegir por datos en vez de por precio se acumula.
+          Bucharest fue el primer intento — los datos dicen que el enfoque tiene sentido.
+        </p>
+      </div>
 
     </div>
 
