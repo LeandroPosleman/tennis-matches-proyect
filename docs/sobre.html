@@ -195,6 +195,80 @@
     }
     .theme-toggle:hover { color: var(--text); }
 
+    /* ── SUSCRIPCIÓN ─────────────────────────── */
+    .subscribe-section {
+      margin-top: 0;
+      padding: 40px 0 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .subscribe-section h3 {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-weight: normal;
+    }
+
+    .subscribe-section p {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 10px;
+      max-width: 480px;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--input-bdr);
+      border-radius: 6px;
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: 'Arial', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .subscribe-form input[type="email"]:focus {
+      border-color: var(--text-sec);
+    }
+
+    .subscribe-form input[type="email"]::placeholder {
+      color: var(--input-ph);
+    }
+
+    .subscribe-form button {
+      padding: 10px 20px;
+      background: var(--amarillo);
+      color: #00342B;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      font-family: 'Arial', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .subscribe-form button:hover { opacity: 0.85; }
+
+    .subscribe-msg {
+      margin-top: 10px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      min-height: 18px;
+    }
+
+    .subscribe-msg.ok  { color: var(--text-sec); }
+    .subscribe-msg.err { color: #e05c4b; }
+
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 600px) {
       .theme-toggle { font-size: 1.5rem; padding: 8px; }
@@ -287,6 +361,20 @@
       </p>
 
     </div>
+
+    <div class="subscribe-section">
+      <h3>Suscribite al blog</h3>
+      <p>Sin spam. Solo cuando haya algo nuevo para contar.</p>
+      <form class="subscribe-form" action="https://blog.us3.list-manage.com/subscribe/post" method="POST" target="mc-iframe">
+        <input type="hidden" name="u" value="d1bca54b98ac13ff1babefce7" />
+        <input type="hidden" name="id" value="ab3a3f9608" />
+        <input type="email" name="EMAIL" placeholder="tu@email.com" required />
+        <button type="submit">Suscribirme</button>
+      </form>
+      <iframe name="mc-iframe" style="display:none"></iframe>
+      <p class="subscribe-msg"></p>
+    </div>
+
   </main>
 
   <footer>
@@ -308,6 +396,21 @@
     toggle.addEventListener('click', function() {
       applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
+
+    // ── Suscripción (iframe oculto) ──
+    var form = document.querySelector('.subscribe-form');
+    var msg  = document.querySelector('.subscribe-msg');
+    if (form) {
+      form.addEventListener('submit', function() {
+        msg.textContent = 'Enviando...';
+        msg.className = 'subscribe-msg';
+        setTimeout(function() {
+          msg.textContent = 'Gracias por suscribirte.';
+          msg.className = 'subscribe-msg ok';
+          form.reset();
+        }, 1500);
+      });
+    }
   </script>
 
 </body>
