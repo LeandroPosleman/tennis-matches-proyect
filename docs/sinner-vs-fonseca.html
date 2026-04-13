@@ -447,12 +447,11 @@
     <div class="subscribe-section">
       <h3>Suscribite al blog</h3>
       <p>Sin spam. Solo cuando haya algo nuevo para contar.</p>
-      <form class="subscribe-form" action="https://blog.us3.list-manage.com/subscribe/post" method="POST" target="_blank">
-        <input type="hidden" name="u" value="d1bca54b98ac13ff1babefce7" />
-        <input type="hidden" name="id" value="ab3a3f9608" />
+      <form class="subscribe-form">
         <input type="email" name="EMAIL" placeholder="tu@email.com" required />
         <button type="submit">Suscribirme</button>
       </form>
+      <p class="subscribe-msg"></p>
     </div>
 
   </article>
@@ -476,6 +475,37 @@
     toggle.addEventListener('click', function() {
       applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
+
+    // ── Suscripción AJAX (Mailchimp JSONP) ──
+    var form = document.querySelector('.subscribe-form');
+    var msg  = document.querySelector('.subscribe-msg');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = form.querySelector('input[name="EMAIL"]').value;
+        var url = 'https://blog.us3.list-manage.com/subscribe/post-json?u=d1bca54b98ac13ff1babefce7&id=ab3a3f9608&EMAIL=' + encodeURIComponent(email) + '&c=mcCallback';
+        msg.textContent = 'Enviando...';
+        msg.className = 'subscribe-msg';
+        window.mcCallback = function(data) {
+          if (data.result === 'success') {
+            msg.textContent = 'Listo, te suscribiste.';
+            msg.className = 'subscribe-msg ok';
+            form.reset();
+          } else {
+            var text = data.msg || 'Hubo un error, intentá de nuevo.';
+            if (text.indexOf('already subscribed') > -1) text = 'Ya estás suscripto.';
+            msg.textContent = text.replace(/<[^>]*>/g, '');
+            msg.className = 'subscribe-msg err';
+          }
+          document.body.removeChild(document.getElementById('mc-jsonp'));
+          delete window.mcCallback;
+        };
+        var s = document.createElement('script');
+        s.id = 'mc-jsonp';
+        s.src = url;
+        document.body.appendChild(s);
+      });
+    }
   </script>
 
 </body>
