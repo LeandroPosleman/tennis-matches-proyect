@@ -63,8 +63,8 @@ tennis-matches-proyect/
 ### Rango de datos
 
 - **Desde:** 2000-01-03
-- **Hasta:** 2026-08-03 (ultima entrada registrada)
-- **Total de partidos:** ~68.408 filas
+- **Hasta:** 2026-08-14 (ultima entrada registrada)
+- **Total de partidos:** ~68.499 filas
 
 ## Paleta de colores (todos los gráficos)
 
